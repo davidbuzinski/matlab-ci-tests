@@ -2,8 +2,6 @@ name: Run MATLAB Tests on GitHub-Hosted Runner
 
 on: # yamllint disable-line rule:truthy
   push:
-env:
-  MATHWORKS_MATLAB_BATCH_BASE_URL: https://mw-ci-static-dev.s3.amazonaws.com/matlab-batch/v1
 jobs:
   run-tests:
     name: Checkout, Compile and Test
@@ -11,25 +9,5 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      
-      # Sets up MATLAB on the GitHub Actions runner
-      - name: Get MATLAB deps
-        run: wget -qO- --retry-connrefused https://ssd.mathworks.com/supportfiles/ci/matlab-deps/v0/install.sh | sudo -E bash -s  -- "r2023b"
-      
-      - name: Get MPM
-        run: mkdir /opt/mpm && wget -O /opt/mpm/mpm https://www.mathworks.com/mpm/glnxa64/mpm && chmod +x /opt/mpm/mpm && ln -s /opt/mpm/mpm /usr/local/bin/mpm
 
-      - name: Install matlab-batch
-        run: wget -qO- --retry-connrefused https://ssd.mathworks.com/supportfiles/ci/matlab-batch/v0/install.sh | sudo -E bash -s --
-
-      - name: Install MATLAB
-        if: ${{ steps.cache-matlab.outputs.cache-hit != 'true' }}
-        run: wget -q https://www.mathworks.com/mpm/glnxa64/mpm && chmod +x mpm && ./mpm install --release=r2024a --destination=/opt/matlab --release-status Prerelease --products MATLAB Parallel_Computing_Toolbox
-
-      - name: Symlink MATLAB
-        run: ln -s /opt/matlab/bin/matlab /usr/local/bin/matlab
-      
-      - name: Run the MATLAB build
-        uses: matlab-actions/run-command@v1
-        with:
-          command: ver
+      - run: echo "##[warning]Big Problem HUGE" 
