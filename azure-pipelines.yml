@@ -12,3 +12,6 @@ pool:
 steps:
 - script: echo "##[warning]This version of setup-matlab is deprecated. Please upgrade!" 
   displayName: 'Setup MATLAB'
+
+- script: echo "##vso[task.logissue type=warning]This version of setup-matlab is deprecated. Please upgrade!"
+  displayName: 'Setup MATLAB'
