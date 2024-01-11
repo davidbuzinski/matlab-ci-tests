@@ -1,0 +1,83 @@
+name: Run MATLAB Tests on GitHub-Hosted Runner
+
+on: # yamllint disable-line rule:truthy
+  push:
+  pull_request:
+    branches:
+      - main
+# env:
+#   # MLM_LICENSE_TOKEN: ${{ secrets.MLM_LICENSE_TOKEN }}
+#   MATHWORKS_MATLAB_BATCH_BASE_URL: https://mw-ci-static-dev.s3.amazonaws.com/matlab-batch/v1
+jobs:
+  run-tests:
+    name: Checkout, Compile and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # - name: Set up MATLAB
+      #   uses: matlab-actions/setup-matlab@v2-beta
+      #   with:
+      #     cache: true
+      #     products: |
+      #       MATLAB
+      #       Image_Processing_Toolbox
+      #       MATLAB_Test
+      #       Optimization_Toolbox
+      #       Parallel_Computing_Toolbox
+      #       Signal_Processing_Toolbox
+      #       Statistics_and_Machine_Learning_Toolbox
+      #       Symbolic_Math_Toolbox
+      
+      - name: Start display server
+        run: |
+          sudo apt-get install xvfb
+          Xvfb :99 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+      
+      # Sets up MATLAB on the GitHub Actions runner
+      - name: Get MATLAB deps
+        run: wget -qO- --retry-connrefused https://ssd.mathworks.com/supportfiles/ci/matlab-deps/v0/install.sh | sudo -E bash -s  -- "r2023b"
+      
+      - name: Get MPM
+        run: mkdir /opt/mpm && wget -O /opt/mpm/mpm https://www.mathworks.com/mpm/glnxa64/mpm && chmod +x /opt/mpm/mpm && ln -s /opt/mpm/mpm /usr/local/bin/mpm
+
+      # - name: Cache MATLAB
+      #   id: cache-matlab
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: /opt/matlab
+      #     key: r2024a
+      
+      - name: Install matlab-batch
+        run: wget -qO- --retry-connrefused https://ssd.mathworks.com/supportfiles/ci/matlab-batch/v0/install.sh | sudo -E bash -s --
+
+      - name: Test matlab-batch
+        run: which matlab-batch
+
+      - name: Test matlab-batch 2
+        run: ls -lah $(which matlab-batch)
+
+      - name: Install MATLAB
+        if: ${{ steps.cache-matlab.outputs.cache-hit != 'true' }}
+        run: wget -q https://www.mathworks.com/mpm/glnxa64/mpm && chmod +x mpm && ./mpm install --release=r2023b --destination=/opt/matlab --products MATLAB Image_Processing_Toolbox MATLAB_Test Optimization_Toolbox Parallel_Computing_Toolbox Signal_Processing_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
+
+      - name: Symlink MATLAB
+        run: ln -s /opt/matlab/bin/matlab /usr/local/bin/matlab
+      
+      - name: Run the MATLAB build
+        uses: matlab-actions/run-build@v1
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: results/test-results.xml
+  
+      - name: Publish Code Coverage Results
+        uses: 5monkeys/cobertura-action@master
+        if: always()
+        with:
+          path: results/coverage.xml
+          minimum_coverage: 20
