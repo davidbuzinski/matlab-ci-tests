@@ -4,7 +4,7 @@ on: # yamllint disable-line rule:truthy
   push:
 jobs:
   run-tests:
-    name: Checkout, Compile and Test
+    name: MATLAB Build
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
