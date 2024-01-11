@@ -2,9 +2,6 @@ name: Run MATLAB Tests on GitHub-Hosted Runner
 
 on: # yamllint disable-line rule:truthy
   push:
-  pull_request:
-    branches:
-      - main
 env:
   MATHWORKS_MATLAB_BATCH_BASE_URL: https://mw-ci-static-dev.s3.amazonaws.com/matlab-batch/v1
 jobs:
@@ -14,12 +11,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      
-      - name: Start display server
-        run: |
-          sudo apt-get install xvfb
-          Xvfb :99 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV
       
       # Sets up MATLAB on the GitHub Actions runner
       - name: Get MATLAB deps
@@ -33,23 +24,12 @@ jobs:
 
       - name: Install MATLAB
         if: ${{ steps.cache-matlab.outputs.cache-hit != 'true' }}
-        run: wget -q https://www.mathworks.com/mpm/glnxa64/mpm && chmod +x mpm && ./mpm install --release=r2024a --destination=/opt/matlab --release-status Prerelease --products MATLAB Image_Processing_Toolbox MATLAB_Test Optimization_Toolbox Parallel_Computing_Toolbox Signal_Processing_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
+        run: wget -q https://www.mathworks.com/mpm/glnxa64/mpm && chmod +x mpm && ./mpm install --release=r2024a --destination=/opt/matlab --release-status Prerelease --products MATLAB Parallel_Computing_Toolbox
 
       - name: Symlink MATLAB
         run: ln -s /opt/matlab/bin/matlab /usr/local/bin/matlab
       
       - name: Run the MATLAB build
-        uses: matlab-actions/run-build@v1
-
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
+        uses: matlab-actions/run-command@v1
         with:
-          files: results/test-results.xml
-  
-      - name: Publish Code Coverage Results
-        uses: 5monkeys/cobertura-action@master
-        if: always()
-        with:
-          path: results/coverage.xml
-          minimum_coverage: 20
+          command: ver
