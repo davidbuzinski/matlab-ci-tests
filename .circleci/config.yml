@@ -1,16 +1,17 @@
 version: '2.1'
+orbs:
+  matlab: mathworks/matlab@0
 jobs:
   issue-warning:
+    environment:
+      MATHWORKS_INSTALLER_BASE_URL: "https://mpmtest.s3.amazonaws.com"
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
-      - run:
-          name: issue-warning
-          command: |
-            YELLOW='\033[1;33m'
-            NC='\033[0m' # No Color
-            echo -e "${YELLOW}WARNING: This version of setup-matlab is deprecated. Please upgrade!${NC}"
+      - matlab/install
+      - matlab/run-command:
+          command: ver
 workflows:
   test_my_app:
     jobs:
