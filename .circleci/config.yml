@@ -1,5 +1,6 @@
 version: '2.1'
 orbs:
+  win: circleci/windows@5.0
   matlab: mathworks/matlab@0
 
 executors:
@@ -16,8 +17,10 @@ jobs:
   issue-warning:
     environment:
       MATHWORKS_INSTALLER_BASE_URL: "https://mpmtest.s3.amazonaws.com"
-    docker:
-      - image: cimg/base:stable
+    parameters:
+      os:
+        type: executor
+    executor: << parameters.os >> 
     steps:
       - checkout
       - matlab/install
