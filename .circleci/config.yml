@@ -1,6 +1,17 @@
 version: '2.1'
 orbs:
   matlab: mathworks/matlab@0
+
+executors:
+  linux: # a Linux VM running Ubuntu 20.04 
+    machine:
+      image: ubuntu-2204:2024.01.1
+  macos: # macos executor running Xcode
+    macos:
+      xcode: 15.1.0
+    resource_class: macos.x86.medium.gen2
+  windows:
+    win/default
 jobs:
   issue-warning:
     environment:
@@ -15,5 +26,7 @@ jobs:
 workflows:
   test_my_app:
     jobs:
-      - issue-warning
-
+      - issue-warning:
+          matrix:
+            parameters:
+              os: [linux, macos, windows]
