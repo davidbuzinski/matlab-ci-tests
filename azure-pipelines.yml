@@ -8,6 +8,8 @@ jobs:
           vmImage: macOS-latest
         windows:
           vmImage: windows-latest
+    pool:
+      vmImage: $(vmImage)
     steps:
     - task: InstallMATLAB@1
     - task: RunMATLABBuild@1
