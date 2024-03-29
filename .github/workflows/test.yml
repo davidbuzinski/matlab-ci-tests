@@ -4,7 +4,7 @@ jobs:
     name: Run MATLAB Build
     runs-on: ubuntu-latest
     container:
-      image: debian:12
+      image: debian:11
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
