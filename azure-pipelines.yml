@@ -1,13 +1,6 @@
-strategy:
-  matrix:
-    linux:
-      vmImage: ubuntu-22.04
-    macos:
-      vmImage: macOS-latest
-    windows:
-      vmImage: windows-latest
 pool:
-  vmImage: $(vmImage)
+  vmImage: ubuntu-latest
+container: debian:11
 steps:
 - task: InstallMATLAB@1
 - task: RunMATLABBuild@1
