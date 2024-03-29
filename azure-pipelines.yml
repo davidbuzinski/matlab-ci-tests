@@ -2,7 +2,7 @@ pool:
   vmImage: ubuntu-latest
 container: debian:11
 steps:
-- bash: apt-get update && apt-get install -y curl sudo unzip
+- bash: sudo apt-get update && sudo apt-get install -y curl unzip
 - task: InstallMATLAB@1
 - task: RunMATLABBuild@1
   inputs:
