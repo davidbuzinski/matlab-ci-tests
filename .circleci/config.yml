@@ -1,22 +1,21 @@
 version: '2.1'
 orbs:
   win: circleci/windows@5.0
-  matlab: mathworks/matlab@0
+  matlab: mathworks/matlab@1
 
 executors:
-  linux: # a Linux VM running Ubuntu 20.04 
+  linux:
     machine:
-      image: ubuntu-2204:2024.01.1
-  macos: # macos executor running Xcode
+      image: ubuntu-2204:current
+  macos:
     macos:
       xcode: 15.1.0
     resource_class: macos.x86.medium.gen2
   windows:
     win/default
+  
 jobs:
-  issue-warning:
-    environment:
-      MATHWORKS_INSTALLER_BASE_URL: "https://mpmtest.s3.amazonaws.com"
+  build:
     parameters:
       os:
         type: executor
@@ -24,12 +23,13 @@ jobs:
     steps:
       - checkout
       - matlab/install
-      - matlab/run-command:
-          command: ver
+      - matlab/run-build:
+          tasks: test
+
 workflows:
-  test_my_app:
+  tests-on-all-platforms:
     jobs:
-      - issue-warning:
+      - build:
           matrix:
             parameters:
               os: [linux, macos, windows]
