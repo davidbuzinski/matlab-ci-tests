@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - run: apt-get update && apt-get install -y curl sudo unzip
+      - run: apt-get update && apt-get install -y unzip
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
       - name: Run build

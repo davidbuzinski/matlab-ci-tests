@@ -7,7 +7,7 @@ jobs:
       - image: debian:11
     steps:
       - checkout
-      - run: apt-get update && apt-get install -y curl sudo unzip
+      - run: apt-get update && apt-get install -y unzip
       - matlab/install
       - matlab/run-build:
           tasks: test
