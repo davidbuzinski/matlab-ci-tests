@@ -1,6 +1,6 @@
 pool:
   vmImage: ubuntu-latest
-container: mathworks/matlab-deps
+container: mathworks/matlab-deps:latest
 steps:
 - task: InstallMATLAB@1
 - task: RunMATLABBuild@1
