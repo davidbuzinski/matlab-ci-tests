@@ -10,9 +10,7 @@ jobs:
         id: cache-matlab
         uses: actions/cache@v4
         with:
-          path: |
-            ${{ runner.tool_cache }}/MATLAB
-            D:\hostedtoolcache\windows\MATLAB\2023.2.999\x64
+          path: ${{ runner.tool_cache }}/MATLAB
           key: ${{ matrix.os }}-${{ matrix.release }}
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
