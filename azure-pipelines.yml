@@ -10,6 +10,6 @@ pool:
   vmImage: $(vmImage)
 steps:
 - task: InstallMATLAB@1
-- task: RunMATLABBuild@1
+- task: RunMATLABBuild@0
   inputs:
     tasks: test
