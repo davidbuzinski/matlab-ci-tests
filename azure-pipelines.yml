@@ -9,7 +9,7 @@ strategy:
 pool:
   vmImage: $(vmImage)
 steps:
-- task: InstallMATLAB@1.11.4
-- task: RunMATLABBuild@0.11.4
+- task: InstallMATLAB@1
+- task: RunMATLABBuild@1
   inputs:
     tasks: test
