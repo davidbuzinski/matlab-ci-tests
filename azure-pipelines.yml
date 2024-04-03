@@ -28,10 +28,6 @@ jobs:
       mac-MATLAB-R2024a:
         PLATFORM: 'macOS-latest'
         MATLAB_RELEASE: R2024a
-
-        
-  variables: 
-  - group: matlab-batch-license
  
   steps:
   - task: Cache@2
