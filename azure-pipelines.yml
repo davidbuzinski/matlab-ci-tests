@@ -3,7 +3,7 @@ pool:
 steps:
   - task: InstallMATLAB@1
     inputs:
-      products: >
+      products: |
         Simulink
         Simulink_Test
         Parallel_Computing_Toolbox
