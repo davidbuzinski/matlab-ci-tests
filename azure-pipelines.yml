@@ -30,10 +30,6 @@ jobs:
         MATLAB_RELEASE: R2024a
  
   steps:
-  - task: Cache@2
-    inputs:
-      key: MATLAB-$(MATLAB_RELEASE)-$(PLATFORM)-20240329c
-      path: $(AGENT_TOOLSDIRECTORY)/MATLAB
   - task: InstallMATLAB@1
     inputs:
       release: $(MATLAB_RELEASE)
@@ -45,5 +41,5 @@ jobs:
   # This task Runs all the MATLAB and Simulink tests and generate variety of test artifacts. Check the documentation for all supported task parameters.
   - task: RunMATLABCommand@1
     inputs:
-      command: ver
+      command: license inuse
        
