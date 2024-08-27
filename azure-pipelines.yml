@@ -9,9 +9,6 @@ jobs:
   steps:
   - task: InstallMATLAB@1
     inputs:
-      release: $(MATLAB_RELEASE)
-      products: >
-        MATLAB
   - task: RunMATLABCommand@1
     inputs:
       command: ver
