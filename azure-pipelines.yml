@@ -6,6 +6,7 @@ jobs:
   pool:
     vmImage: 'macOS-14'
   steps:
+  - script: uname -m
   - task: InstallMATLAB@1
   - task: RunMATLABCommand@1
     inputs:
