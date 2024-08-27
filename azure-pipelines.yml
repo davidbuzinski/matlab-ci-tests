@@ -5,7 +5,7 @@ jobs:
 - job: 'RunMATLABBuild'
 
  pool:
-    vmImage: macos-latest
+    vmImage: macos-14
     
   steps:
   - task: InstallMATLAB@1
