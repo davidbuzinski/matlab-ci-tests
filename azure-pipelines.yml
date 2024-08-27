@@ -3,9 +3,10 @@ trigger:
     
 jobs:
 - job: 'RunMATLABBuild'
- 
-  pool: maci
- 
+
+ pool:
+    vmImage: macos-latest
+    
   steps:
   - task: InstallMATLAB@1
   - task: RunMATLABCommand@1
