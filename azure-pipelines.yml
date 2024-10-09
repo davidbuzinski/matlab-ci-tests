@@ -1,14 +1,40 @@
 trigger:
 - main
-    
+
 jobs:
 - job: 'RunMATLABBuild'
+
   pool:
-    vmImage: 'macOS-14'
+    vmImage: $(PLATFORM)
+  strategy:
+    matrix:    
+      windows-MATLAB-R2023a:
+        PLATFORM: 'windows-latest'
+        MATLAB_RELEASE: R2023a
+      linux-MATLAB-R2023a:
+        PLATFORM: 'ubuntu-latest'
+        MATLAB_RELEASE: R2023a
+      mac-MATLAB-R2023a:
+        PLATFORM: 'macOS-latest'
+        MATLAB_RELEASE: R2023a
+        
+      windows-MATLAB-R2024a:
+        PLATFORM: 'windows-latest'
+        MATLAB_RELEASE: R2024a
+      linux-MATLAB-R2024a:
+        PLATFORM: 'ubuntu-latest'
+        MATLAB_RELEASE: R2024a
+      mac-MATLAB-R2024a:
+        PLATFORM: 'macOS-latest'
+        MATLAB_RELEASE: R2024a
+
   steps:
-  - script: uname -m
   - task: InstallMATLAB@1
+    inputs:
+      release: $(MATLAB_RELEASE)
+      products: >
+        MATLAB
+  # This task Runs all the MATLAB and Simulink tests and generate variety of test artifacts. Check the documentation for all supported task parameters.
   - task: RunMATLABCommand@1
     inputs:
       command: ver
-       
