@@ -1,6 +1,5 @@
 version: '2.1'
 orbs:
-  win: circleci/windows@5.0
   matlab: mathworks/matlab@1
 
 executors:
@@ -9,11 +8,11 @@ executors:
       image: ubuntu-2204:current
   macos:
     macos:
-      xcode: 15.1.0
-    resource_class: macos.x86.medium.gen2
+      xcode: 14.2.0
   windows:
-    win/default
-  
+    resource_class: windows.medium
+    machine:
+      image: windows-server-2022-gui:current  
 jobs:
   build:
     parameters:
