@@ -7,26 +7,16 @@ jobs:
   pool:
     vmImage: $(PLATFORM)
   strategy:
-    matrix:    
-      windows-MATLAB-R2023a:
+    matrix:            
+      windows-MATLAB-latest-including-prerelease:
         PLATFORM: 'windows-latest'
-        MATLAB_RELEASE: R2023a
-      linux-MATLAB-R2023a:
+        MATLAB_RELEASE: latest-including-prerelease
+      linux-MATLAB-latest-including-prerelease:
         PLATFORM: 'ubuntu-latest'
-        MATLAB_RELEASE: R2023a
-      mac-MATLAB-R2023a:
+        MATLAB_RELEASE: latest-including-prerelease
+      mac-MATLAB-latest-including-prerelease:
         PLATFORM: 'macOS-latest'
-        MATLAB_RELEASE: R2023a
-        
-      windows-MATLAB-R2024a:
-        PLATFORM: 'windows-latest'
-        MATLAB_RELEASE: R2024a
-      linux-MATLAB-R2024a:
-        PLATFORM: 'ubuntu-latest'
-        MATLAB_RELEASE: R2024a
-      mac-MATLAB-R2024a:
-        PLATFORM: 'macOS-latest'
-        MATLAB_RELEASE: R2024a
+        MATLAB_RELEASE: latest-including-prerelease
 
   steps:
   - task: InstallMATLAB@1
