@@ -21,7 +21,8 @@ jobs:
     executor: << parameters.os >> 
     steps:
       - checkout
-      - matlab/install
+      - matlab/install:
+          release: latest-including-prerelease
       - matlab/run-build:
           tasks: test
 
