@@ -6,9 +6,6 @@ executors:
   linux:
     machine:
       image: ubuntu-2204:current
-  macos:
-    macos:
-      xcode: 14.2.0
   windows:
     resource_class: windows.medium
     machine:
