@@ -29,4 +29,4 @@ workflows:
       - build:
           matrix:
             parameters:
-              os: [linux, macos, windows]
+              os: [linux, windows]
