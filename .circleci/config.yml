@@ -10,23 +10,30 @@ executors:
     resource_class: windows.medium
     machine:
       image: windows-server-2022-gui:current  
+
 jobs:
   build:
     parameters:
       os:
         type: executor
-    executor: << parameters.os >> 
+      command:
+        type: string
+    executor: << parameters.os >>
     steps:
       - checkout
       - matlab/install:
-          release: latest-including-prerelease
-      - matlab/run-build:
-          tasks: test
+          release: latest
+      - matlab/run-command:
+          command: << parameters.command >>
 
 workflows:
   tests-on-all-platforms:
     jobs:
       - build:
-          matrix:
-            parameters:
-              os: [linux, windows]
+          name: build-linux
+          os: linux
+          command: disp('hello linux')
+      - build:
+          name: build-windows
+          os: windows
+          command: disp('hello windows')
