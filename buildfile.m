@@ -14,6 +14,7 @@ end
 
 function argsTask(~, options)
 arguments
+    ~
     options.myArgs = "nothing"
 end
 disp(options.myArgs);
