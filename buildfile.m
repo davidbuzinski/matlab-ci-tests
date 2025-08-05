@@ -11,3 +11,10 @@ plan("test") = TestTask;
 
 plan.DefaultTasks = ["check" "test"];
 end
+
+function argsTask(~, options)
+arguments
+    options.myArgs = "nothing"
+end
+disp(options.myArgs);
+end

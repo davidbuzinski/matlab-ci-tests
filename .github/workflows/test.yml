@@ -12,6 +12,6 @@ jobs:
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
       - name: Run build
-        uses: matlab-actions/run-tests@v2
+        uses: matlab-actions/run-build@v2
         with:
-          code-coverage-cobertura: code-coverage/coverage.xml
+          tasks: args(myArgs="someargument")
