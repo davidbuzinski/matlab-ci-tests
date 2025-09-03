@@ -14,4 +14,4 @@ jobs:
       - name: Run build
         uses: matlab-actions/run-command@v2
         with:
-          command: ver
+          command: pause(1200)
