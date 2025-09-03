@@ -1,7 +1,4 @@
 on: [push]
-defaults:
-  run:
-    shell: powershell
 jobs:
   build:
     name: Run MATLAB Build
