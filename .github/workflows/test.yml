@@ -2,13 +2,10 @@ on: [push]
 jobs:
   build:
     name: Run MATLAB Build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - run: curl -fsSL https://ssd.mathworks.com/supportfiles/ci/matlab-deps/v0/install.sh | sudo bash
-      - name: Clear tool cache
-        run: rm -rf $RUNNER_TOOL_CACHE/MATLAB
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
