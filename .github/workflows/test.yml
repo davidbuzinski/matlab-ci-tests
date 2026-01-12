@@ -9,7 +9,7 @@ jobs:
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
-          release: r2025b
+          release: r2020b
       - name: Run build
         uses: matlab-actions/run-command@v2
         with:
