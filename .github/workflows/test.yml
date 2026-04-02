@@ -9,7 +9,7 @@ jobs:
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
-          products: Simulink; echo PWND
+          products: Simulink ;echo PWND
       - name: Run Command
         uses: matlab-actions/run-command@v3
         with:
