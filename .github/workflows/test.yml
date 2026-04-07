@@ -10,6 +10,8 @@ jobs:
         uses: matlab-actions/setup-matlab@v3
       - name: Run Command
         uses: matlab-actions/run-command@v3
+        with:
+          command: ver
       - name: Run Tests
         uses: matlab-actions/run-tests@v3
       - name: Run Build
