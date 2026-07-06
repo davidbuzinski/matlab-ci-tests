@@ -9,8 +9,10 @@ jobs:
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
-          products: Parallel_Computing_Toolbox --no-gpu
+          release: latest-including-prerelease
       - name: Run Command
         uses: matlab-actions/run-command@v3
         with:
           command: ver
+      - name: Run Build
+        uses: matlab-actions/run-build@v3
