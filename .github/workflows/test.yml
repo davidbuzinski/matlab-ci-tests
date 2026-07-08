@@ -13,6 +13,7 @@ jobs:
         uses: matlab-actions/setup-matlab@v3
         with:
           release: latest-including-prerelease
+          cache: true
       - name: Run Command
         uses: matlab-actions/run-command@v3
         with:
