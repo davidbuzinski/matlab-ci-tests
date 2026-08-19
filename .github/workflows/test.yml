@@ -14,9 +14,5 @@ jobs:
         with:
           release: R2021b
           cache: true
-      - name: Run Command
+      - name: Run Tests
         uses: matlab-actions/run-tests@v3
-        with:
-          command: ver
-      - name: Run Build
-        uses: matlab-actions/run-build@v3
