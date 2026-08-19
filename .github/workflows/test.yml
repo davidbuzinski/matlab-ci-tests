@@ -16,3 +16,8 @@ jobs:
           cache: true
       - name: Run Tests
         uses: matlab-actions/run-tests@v3
+        with:
+          source-folder: src
+          select-by-folder: tests
+          test-results-junit: test.xml
+          code-coverage-cobertura: coverage.xml
