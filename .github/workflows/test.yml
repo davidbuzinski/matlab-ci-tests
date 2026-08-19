@@ -12,10 +12,10 @@ jobs:
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
-          release: latest-including-prerelease
+          release: R2021b
           cache: true
       - name: Run Command
-        uses: matlab-actions/run-command@v3
+        uses: matlab-actions/run-tests@v3
         with:
           command: ver
       - name: Run Build
