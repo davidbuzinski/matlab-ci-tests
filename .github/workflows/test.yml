@@ -14,6 +14,10 @@ jobs:
         with:
           release: latest
           cache: true
+      - name: BOOM
+        uses: matlab-actions/run-command@v3
+        with:
+          command: error("BOOM!");
       - name: Run Tests
         uses: matlab-actions/run-command@v3
         with:
