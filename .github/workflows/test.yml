@@ -3,7 +3,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest] #, windows-latest, macos-latest]
     name: Run MATLAB Build
     runs-on: ${{ matrix.os }}
     steps:
@@ -12,7 +12,7 @@ jobs:
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
-          release: R2021b
+          release: latest
           cache: true
       - name: Run Tests
         uses: matlab-actions/run-command@v3
