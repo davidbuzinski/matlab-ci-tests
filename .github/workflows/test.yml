@@ -2,8 +2,10 @@ on: [push]
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
+        release: [latest, r2023a]
     name: Run MATLAB Build
     runs-on: ${{ matrix.os }}
     steps:
@@ -13,6 +15,7 @@ jobs:
         uses: matlab-actions/setup-matlab@v3
         with:
           cache: true
+          release: ${{ matrix.release }}
       - name: Run tests
         uses: matlab-actions/run-command@v3
         with:
