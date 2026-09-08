@@ -17,6 +17,6 @@ jobs:
           cache: true
           release: ${{ matrix.release }}
       - name: Run tests
-        uses: matlab-actions/run-command@v3
+        uses: davidbuzinski/run-command@main
         with:
           command: addpath(genpath("hedcode")), addpath(genpath("tests"), runAllTests
