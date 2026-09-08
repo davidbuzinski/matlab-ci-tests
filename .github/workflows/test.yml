@@ -15,9 +15,7 @@ jobs:
           release: R2021b
           cache: true
       - name: Run Tests
-        uses: matlab-actions/run-tests@v3
+        uses: matlab-actions/run-command@v3
         with:
-          source-folder: src
-          select-by-folder: tests
-          test-results-junit: test.xml
-          code-coverage-cobertura: coverage.xml
+          command: addpath(genpath("hedcode")), addpath(genpath("tests"), runAllTests
+          
