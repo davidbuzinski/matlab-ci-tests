@@ -16,6 +16,7 @@ jobs:
         with:
           cache: true
           release: ${{ matrix.release }}
+      # test
       - name: Run tests
         uses: davidbuzinski/run-command@main
         with:
