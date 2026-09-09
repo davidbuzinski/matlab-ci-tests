@@ -20,7 +20,7 @@ jobs:
       #   uses: davidbuzinski/run-command@main
       #   with:
       #     command: error("BOOM!");
-      # # 
+      #
       - name: Run tests
         uses: davidbuzinski/run-command@main
         with:
