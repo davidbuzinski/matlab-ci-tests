@@ -16,11 +16,11 @@ jobs:
         with:
           cache: true
           release: ${{ matrix.release }}
-      - name: BOOM
-        uses: davidbuzinski/run-command@main
-        with:
-          command: error("BOOM!");
-      # 
+      # - name: BOOM
+      #   uses: davidbuzinski/run-command@main
+      #   with:
+      #     command: error("BOOM!");
+      # # 
       - name: Run tests
         uses: davidbuzinski/run-command@main
         with:
